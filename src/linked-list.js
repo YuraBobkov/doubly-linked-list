@@ -26,15 +26,28 @@ class LinkedList {
 
     }
 
-    head() {}
+    head() {
+        return this._head.data;
 
-    tail() {}
+    }
+
+    tail() {
+        return this._tail.data;
+
+    }
 
     at(index) {}
 
     insertAt(index, data) {}
 
-    isEmpty() {}
+    isEmpty() {
+        if (this.length == 0) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 
     clear() {}
 
