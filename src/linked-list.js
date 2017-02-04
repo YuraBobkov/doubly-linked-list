@@ -98,9 +98,46 @@ class LinkedList {
 
     }
 
-    clear() {}
+    clear() {
+        this._head.data = null;
+        this._tail.data = null;
+        this.length = 0;
+        return this;
 
-    deleteAt(index) {}
+    }
+
+    deleteAt(index) {
+        var currentNode = this._head,
+            count = 0,
+            beforeNodeToDelete = null,
+            afterNodeToDelete = null;
+
+        if (this.length == 0 || index < 1 || index > this.length) {
+            return null;
+        }
+
+        if (index == 1) {
+            this._head = currentNode.next;
+
+        } else if (index == this.length) {
+            this._tail = this._tail.prev;
+            this._tail.next = null;
+
+        } else {
+            while (count < index) {
+                currentNode = currentNode.next;
+                count++;
+            }
+
+            beforeNodeToDelete = currentNode.prev;
+            afterNodeToDelete = currentNode.next;
+
+            beforeNodeToDelete.next = afterNodeToDelete;
+            afterNodeToDelete.prev = beforeNodeToDelete;
+        }
+        this.length--;
+
+    }
 
     reverse() {}
 
