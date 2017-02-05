@@ -49,44 +49,26 @@ class LinkedList {
     }
 
     insertAt(index, data) {
-        var currentNode = this._head,
-            newNode = new Node(data),
-            count = 0;
-
-        if (index < 1 || index > this.length + 1) {
+        if (index >= this.length || index < 0){
             return null;
         }
 
-        if (this.length === 0) {
-            this._head = newNode;
-            this._tail = newNode;
-
-        } else if (index === 1) {
-            newNode.next = this._head;
-            this._head.prev = newNode;
-            this._head = newNode;
-
-        } else if (index === this.length + 1) {
-            newNode.prev = this._tail;
-            this._tail.next = newNode;
-            this._tail = newNode;
-
-        } else {
-            while (count < index) {
-                currentNode = currentNode.next;
-                count++;
-            }
-
-            newNode.prev = currentNode.prev;
-            newNode.next = currentNode;
-            currentNode.prev = newNode;
-
-            this.length++;
-
+        var currentNode = this._head;
+        for (var i = 0; i < index; i++) {
+            currentNode = currentNode.next;
         }
+        var node = new Node(data);
+        var nodePrev = currentNode.prev;
 
+        node.prev = nodePrev;
+        node.next = currentNode;
+        currentNode.prev = node;
+
+        if (nodePrev != null){
+            nodePrev.next = node;
+        }
+        this.length++;
         return this;
-
     }
 
     isEmpty() {
@@ -140,7 +122,18 @@ class LinkedList {
     }
 
     reverse() {
-        
+        var left = this._head;
+        var right = this._tail;
+
+        for (var i = 0; i < Math.floor(this.length / 2); i++) {
+            var data = left.data;
+            left.data = right.data;
+            right.data = data;
+
+            left = left.next;
+            right = right.prev;
+        }
+        return this;
     }
 
     indexOf(data) {
