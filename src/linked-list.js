@@ -139,7 +139,9 @@ class LinkedList {
 
     }
 
-    reverse() {}
+    reverse() {
+        
+    }
 
     indexOf(data) {
         var currentNode = this._head,
